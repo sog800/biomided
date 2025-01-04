@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const Navbar = () => {
@@ -11,20 +12,20 @@ const Navbar = () => {
         <Logo />
 
         {/* Links for larger screens */}
-        <div className="hidden md:flex space-x-6">
-          <a href="#home" className="text-emerald-600 hover:text-sky-500">
+        <ul className="hidden md:flex space-x-6">
+          <Link  to="/" className="text-emerald-600 hover:text-sky-500">
             Home
-          </a>
-          <a href="#about" className="text-emerald-600 hover:text-sky-500">
+          </Link>
+          <Link to="/about" className="text-emerald-600 hover:text-sky-500">
             About
-          </a>
-          <a href="#blog" className="text-emerald-600 hover:text-sky-500">
-            Blog
-          </a>
-          <a href="#contact" className="text-emerald-600 hover:text-sky-500">
+          </Link>
+          <Link to="/blogs" className="text-emerald-600 hover:text-sky-500">
+            Blogs
+          </Link>
+          <Link to="/contact" className="text-emerald-600 hover:text-sky-500">
             Contact
-          </a>
-        </div>
+          </Link>
+        </ul>
 
         {/* Hamburger Menu */}
         <button
