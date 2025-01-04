@@ -6,7 +6,8 @@ import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-const BlogReadingPage = () => {
+
+const BlogReadingPage = ({theme}) => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -81,20 +82,20 @@ const BlogReadingPage = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
-        <Navbar />
+      <header className="">
+        <Navbar theme={theme}/>
       </header>
-      <section className="pt-20 mt-16 py-8 bg-emerald-50 text-center">
-        <h1 className="text-4xl font-extrabold text-emerald-600">
+      <section className={`pt-20 mt-16 py-8 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-emerald-50 text-center'}`}>
+        <h1 className="text-4xl  font-extrabold text-emerald-600">
           {blog.title}
         </h1>
       </section>
-      <section className="py-16 bg-emerald-50">
+      <section className={`py-16 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-emerald-50'}`}>
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
           <aside className="hidden lg:block lg:col-span-2">
             <div className="space-y-6">
               {asideContent.map((content, index) => (
-                <AsideCard
+                <AsideCard theme={theme}
                   key={index}
                   title={content.title}
                   description={content.description}
@@ -174,7 +175,7 @@ const BlogReadingPage = () => {
           </div>
         </div>
       </section>
-      <FeedbackSection />
+      <FeedbackSection theme={theme} />
       <Footer />
     </>
   );

@@ -1,22 +1,46 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, createContext, useEffect } from "react";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import BlogsPage from "./pages/BlogsPage";
 import BlogReadingPage from "./pages/BlogReadingPage";
-import Card from "./components/Card";
+import Navbar from "./components/Navbar";
+import React from "react";
+
+export const ThemeContext = createContext(null);
 
 function App() {
+  const [theme, setTheme] = useState("light");
+
+  // Load the theme from localStorage if available
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  // Toggle theme and store it in localStorage
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme); // Save the new theme in localStorage
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/blogs" element={<BlogsPage />} />
-        <Route path="/blogs/:id" element={<BlogReadingPage />} />
-      </Routes>
-    </Router>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className="App" id={theme}>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage theme={theme} />} />
+            <Route path="/blogs" element={<BlogsPage theme={theme} />} />
+            <Route path="/blogs/:id" element={<BlogReadingPage theme={theme} />} />
+          </Routes>
+        </Router>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
 export default App;
-

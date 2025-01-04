@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FeedbackSection = () => {
+const FeedbackSection = ({ theme }) => {
   const [feedback, setFeedback] = useState("");
   const [message, setMessage] = useState("");
 
@@ -14,10 +14,22 @@ const FeedbackSection = () => {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section
+      className={`py-16 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}
+    >
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold text-emerald-600 mb-4">We Value Your Feedback</h2>
-        <p className="text-lg text-gray-700 mb-6">
+        <h2
+          className={`text-4xl font-bold mb-4 ${
+            theme === "dark" ? "text-emerald-400" : "text-emerald-600"
+          }`}
+        >
+          We Value Your Feedback
+        </h2>
+        <p
+          className={`text-lg mb-6 ${
+            theme === "dark" ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
           Share your thoughts and help us improve!
         </p>
         <div className="max-w-2xl mx-auto">
@@ -25,7 +37,11 @@ const FeedbackSection = () => {
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
             placeholder="Write your feedback here..."
-            className="w-full h-32 p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 mb-4"
+            className={`w-full h-32 p-4 border rounded-lg focus:outline-none focus:ring-2 mb-4 ${
+              theme === "dark"
+                ? "bg-gray-700 text-white border-gray-600 focus:ring-sky-400"
+                : "bg-white text-gray-900 border-gray-300 focus:ring-sky-500"
+            }`}
           />
           <button
             onClick={handleFeedbackSubmit}
@@ -34,7 +50,11 @@ const FeedbackSection = () => {
             Submit Feedback
           </button>
           {message && (
-            <p className={`mt-4 text-lg ${message.includes("Thank you") ? "text-green-500" : "text-red-500"}`}>
+            <p
+              className={`mt-4 text-lg ${
+                message.includes("Thank you") ? "text-green-500" : "text-red-500"
+              }`}
+            >
               {message}
             </p>
           )}
