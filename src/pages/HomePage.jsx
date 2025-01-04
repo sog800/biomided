@@ -20,9 +20,10 @@ const HomePage = () => {
       <Header />
       <section className="py-16 bg-emerald-50">
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogs.map((blog, index) => (
+          {blogs.map((blog) => (
             <Card
-              key={index}
+              blogId={blog.id}
+              key={blog.id}
               image={blog.image}
               title={blog.title}
               description={blog.description}

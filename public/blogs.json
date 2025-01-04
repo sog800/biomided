@@ -7,7 +7,8 @@
       "id": 1,
       "image": "https://picsum.photos/300/200?random=1",
       "title": "The Secret to Radiant Skin",
-      "description": "Discover how natural remedies can enhance your beauty."
+      "description": "Discover how natural remedies can enhance your beauty.",
+      "blogBody" : ""
     },
     {
       "author": "Dr. John Smith",
@@ -17,7 +18,8 @@
       "id": 2,
       "image": "https://picsum.photos/300/200?random=2",
       "title": "Healthy Eating Habits",
-      "description": "Learn the essentials of a balanced diet for wellness."
+      "description": "Learn the essentials of a balanced diet for wellness.",
+      "blogBody" : ""
     },
     {
       "author": "Dr. Jane Doe",
@@ -27,7 +29,8 @@
       "id": 3,
       "image": "https://picsum.photos/300/200?random=3",
       "title": "Staying Active",
-      "description": "Fitness tips to keep you healthy and energized."
+      "description": "Fitness tips to keep you healthy and energized.",
+      "blogBody" : ""
     },
     {
       "author": "Cyrus Longwe",
@@ -37,7 +40,8 @@
       "id": 4,
       "image": "https://picsum.photos/300/200?random=4",
       "title": "Mindful Living",
-      "description": "Reduce stress and find peace through mindfulness."
+      "description": "Reduce stress and find peace through mindfulness.",
+      "blogBody" : ""
     }
   ]
   

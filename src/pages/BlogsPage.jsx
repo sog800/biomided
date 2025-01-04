@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import Card from "../components/Card";
 import FeedbackSection from "../components/FeedbackSection";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const AsideCard = ({ title, description }) => (
   <div className="bg-white shadow-md rounded-lg p-4">
@@ -29,9 +30,11 @@ const BlogsPage = () => {
 
   return (
     <>
-      <Header />
+      <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+        <Navbar/>
+      </header>
 
-      <section className="py-8 bg-emerald-50 text-center">
+      <section className="py-8 mt-16 bg-emerald-50 text-center">
         <h1 className="text-4xl font-extrabold text-emerald-600">
           Explore Our Blogs
         </h1>
@@ -84,7 +87,7 @@ const BlogsPage = () => {
       </section>
 
       <FeedbackSection />
-      
+
       <Footer />
     </>
   );

@@ -4,6 +4,7 @@ import AsideCard from "../components/AsideCard";
 import FeedbackSection from "../components/FeedbackSection";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const BlogReadingPage = () => {
   const { id } = useParams();
@@ -21,7 +22,6 @@ const BlogReadingPage = () => {
       })
 
       .then((data) => {
-        
         const cleanedId = id.startsWith(":") ? id.slice(1) : id;
         const foundBlog = data.find((blog) => String(blog.id) === cleanedId);
 
@@ -81,13 +81,10 @@ const BlogReadingPage = () => {
 
   return (
     <>
-      <Header
-        links={[
-          { name: "Home", path: "/" },
-          { name: "Blogs", path: "/blogs" },
-        ]}
-      />
-      <section className="py-8 bg-emerald-50 text-center">
+      <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+        <Navbar />
+      </header>
+      <section className="pt-20 mt-16 py-8 bg-emerald-50 text-center">
         <h1 className="text-4xl font-extrabold text-emerald-600">
           {blog.title}
         </h1>
@@ -114,7 +111,10 @@ const BlogReadingPage = () => {
               />
               <div>
                 <h3 className="text-xl font-semibold">{blog.author}</h3>
-                <p className="text-gray-600">{blog.authorBio}</p>
+                <p className="text-gray-600">{blog.bio}</p>
+                <p className="text-gray-600">
+                  <i>{blog.education}</i>
+                </p>
               </div>
             </div>
             <div className="mb-8">
