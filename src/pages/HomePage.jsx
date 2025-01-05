@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { GoArrowRight } from "react-icons/go";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import AdvertiseSection from "../components/AdvertiseSection";
 
 const HomePage = ({ theme }) => {
   const [blogs, setBlogs] = useState([]);
@@ -45,12 +46,13 @@ const HomePage = ({ theme }) => {
           ))}
         </div>
       </section>
-      <section className="flex justify-center items-center py-8">
+      <section className="flex justify-center items-center py-8 bg-gray-800"> 
         <Button label={`Vew more ->`} onClick={handleClick} theme={theme} />
       </section>
 
       <LifeSection theme={theme} />
       <AboutSection theme={theme} />
+      <AdvertiseSection theme={theme} />
       <Footer />
     </>
   );

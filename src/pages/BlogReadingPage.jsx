@@ -86,7 +86,7 @@ const BlogReadingPage = ({theme}) => {
         <Navbar theme={theme}/>
       </header>
       <section className={`pt-20 mt-16 py-8 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-emerald-50 text-center'}`}>
-        <h1 className="text-4xl  font-extrabold text-emerald-600">
+        <h1 className="text-4xl font-extrabold text-emerald-600 text-center">
           {blog.title}
         </h1>
       </section>
