@@ -5,9 +5,9 @@ import FeedbackSection from "../components/FeedbackSection";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import handleLikes from "../utils/handlelikes";
 
-
-const BlogReadingPage = ({theme}) => {
+const BlogReadingPage = ({ theme }) => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,13 +21,13 @@ const BlogReadingPage = ({theme}) => {
         }
         return response.json();
       })
-
       .then((data) => {
         const cleanedId = id.startsWith(":") ? id.slice(1) : id;
         const foundBlog = data.find((blog) => String(blog.id) === cleanedId);
 
         if (foundBlog) {
           setBlog(foundBlog);
+          setLikes(foundBlog.likes); // Initialize likes from fetched data
         } else {
           setError("Blog not found.");
         }
@@ -43,18 +43,6 @@ const BlogReadingPage = ({theme}) => {
   // Like and heart interaction states
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
-  const [hearts, setHearts] = useState(0);
-  const [isHearted, setIsHearted] = useState(false);
-
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    setLikes((prev) => (isLiked ? prev - 1 : prev + 1));
-  };
-
-  const handleHeart = () => {
-    setIsHearted(!isHearted);
-    setHearts((prev) => (isHearted ? prev - 1 : prev + 1));
-  };
 
   // Comments state
   const [comments, setComments] = useState([]);
@@ -83,19 +71,30 @@ const BlogReadingPage = ({theme}) => {
   return (
     <>
       <header className="">
-        <Navbar theme={theme}/>
+        <Navbar theme={theme} />
       </header>
-      <section className={`pt-20 mt-16 py-8 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-emerald-50 text-center'}`}>
+      <section
+        className={`pt-20 mt-16 py-8 ${
+          theme === "dark"
+            ? "bg-gray-800 text-white"
+            : "bg-emerald-50 text-center"
+        }`}
+      >
         <h1 className="text-4xl font-extrabold text-emerald-600 text-center">
           {blog.title}
         </h1>
       </section>
-      <section className={`py-16 ${theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-emerald-50'}`}>
+      <section
+        className={`py-16 ${
+          theme === "dark" ? "bg-gray-800 text-white" : "bg-emerald-50"
+        }`}
+      >
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
           <aside className="hidden lg:block lg:col-span-2">
             <div className="space-y-6">
               {asideContent.map((content, index) => (
-                <AsideCard theme={theme}
+                <AsideCard
+                  theme={theme}
                   key={index}
                   title={content.title}
                   description={content.description}
@@ -123,20 +122,14 @@ const BlogReadingPage = ({theme}) => {
             </div>
             <div className="flex items-center gap-4 mb-8">
               <button
-                onClick={handleLike}
+                onClick={() =>
+                  handleLikes(isLiked, likes, setLikes, setIsLiked, id)
+                }
                 className={`flex items-center gap-2 ${
                   isLiked ? "text-blue-600" : "text-gray-600"
                 }`}
               >
                 👍 {likes}
-              </button>
-              <button
-                onClick={handleHeart}
-                className={`flex items-center gap-2 ${
-                  isHearted ? "text-red-600" : "text-gray-600"
-                }`}
-              >
-                ❤️ {hearts}
               </button>
             </div>
             <div className="mb-8">
