@@ -34,8 +34,8 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" element={<HomePage theme={theme} />} />
-            <Route path="/blogs" element={<BlogsPage theme={theme} />} />
+          <Route path="/" element={<HomePage theme={theme} />} />
+          <Route path="/blogs" element={<BlogsPage theme={theme} />} />
             <Route path="/blogs/:id" element={<BlogReadingPage theme={theme} />} />
             <Route path="/about" element = {<AboutPage theme={theme} />} />
           </Routes>
