@@ -39,8 +39,8 @@ const Navbar = () => {
           <Link to="/blogs" className="hover:underline hover:text-sky-500">
             Blogs
           </Link>
-          <Link to="/contact" className="hover:underline hover:text-sky-500">
-            Contact
+          <Link to="/about" className="hover:underline hover:text-sky-500">
+            About
           </Link>
         </ul>
 

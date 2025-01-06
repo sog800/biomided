@@ -6,6 +6,7 @@ import BlogsPage from "./pages/BlogsPage";
 import BlogReadingPage from "./pages/BlogReadingPage";
 import Navbar from "./components/Navbar";
 import React from "react";
+import AboutPage from "./pages/AboutPage";
 
 export const ThemeContext = createContext(null);
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="/" element={<HomePage theme={theme} />} />
             <Route path="/blogs" element={<BlogsPage theme={theme} />} />
             <Route path="/blogs/:id" element={<BlogReadingPage theme={theme} />} />
+            <Route path="/about" element = {<AboutPage theme={theme} />} />
           </Routes>
         </Router>
       </div>

@@ -4,8 +4,7 @@ const SearchBar = ({ theme }) => {
   const [query, setQuery] = useState("");
 
   const handleSearch = () => {
-    console.log("Searching for:", query);
-    // Add search functionality here in the future
+    alert("search engine under contruction");
   };
 
   return (

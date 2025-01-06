@@ -8,17 +8,20 @@ import { GoArrowRight } from "react-icons/go";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import AdvertiseSection from "../components/AdvertiseSection";
+import getRandomLinks from "../utils/random";
 
 const HomePage = ({ theme }) => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
+
+  var imageLink = "";
 
   const handleClick = () => {
     navigate("/blogs"); // Removed the colon before blogId
   };
 
   useEffect(() => {
-    fetch("blogs.json")
+    fetch("http://127.0.0.1:8000/hobbies/blogs/")
       .then((response) => response.json())
       .then((data) => setBlogs(data))
       .catch((error) => console.error(error));
@@ -32,22 +35,22 @@ const HomePage = ({ theme }) => {
           theme === "dark" ? "bg-gray-800" : "bg-emerald-50"
         }`}
       >
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {blogs.map((blog) => (
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {blogs.slice(0, 3).map((blog) => (
             <Card
               theme={theme}
               blogId={blog.id}
               key={blog.id}
-              image={blog.image}
+              image={blog.image || (imageLink = getRandomLinks())}
               title={blog.title}
-              description={blog.description}
+              description={`${blog.description.substring(0, 100)}...`}
               onReadMore={() => alert(`Read more about: ${blog.title}`)}
             />
           ))}
         </div>
       </section>
       <section className="flex justify-center items-center py-8 bg-gray-800"> 
-        <Button label={`Vew more ->`} onClick={handleClick} theme={theme} />
+        <Button label={`View more ->`} onClick={handleClick} theme={theme} />
       </section>
 
       <LifeSection theme={theme} />

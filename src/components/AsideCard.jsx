@@ -1,12 +1,14 @@
 import React from "react";
 
-const AsideCard = ({ title, description, theme }) => {
+const AsideCard = ({ title, description, theme, isVisible }) => {
   const themeClass =
-    theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-700";
+    theme === "dark" ? "bg-gray-800 text-white" : "text-gray-700";
 
   return (
     <div
-      className={`${themeClass} shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300 hidden lg:block`}
+      className={`${
+        isVisible ? "block" : "hidden"
+      } ${themeClass} shadow-md  p-4 hover:shadow-lg transition-shadow duration-300 lg:block`}
     >
       <h3
         className={`text-lg font-bold ${
