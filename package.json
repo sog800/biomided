@@ -1,6 +1,5 @@
 {
-   "homepage": "/biomided",
-  "name": "biomidmed",
+  "name": "biomided",
   "private": true,
   "version": "0.0.0",
   "type": "module",
