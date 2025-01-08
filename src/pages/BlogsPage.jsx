@@ -21,15 +21,15 @@ const BlogsPage = ({ theme }) => {
   const [blogs, setBlogs] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://127.0.0.1:8000/hobbies/blogs/")
+    fetch("http://127.0.0.1:8000/bloggs/api/all-blogs")
       .then((response) => response.json())
       .then((data) => setBlogs(data))
       .catch((error) => console.error(error));
   }, []);
 
   const asideContent = [
-    { title: "Sponsored Ad", description: "Check out our latest offers!" },
-    { title: "Newsletter Signup", description: "Subscribe for updates." },
+    { title: "Sponsored Ad", description: "   ads  !" },
+    { title: "Newsletter Signup", description: "   ads  ." },
   ];
 
   return (
@@ -72,7 +72,7 @@ const BlogsPage = ({ theme }) => {
                   theme={theme}
                   blogId={blog.id}
                   key={blog.id}
-                  image={blog.image || (imageLink = getRandomLinks())}
+                  image={blog.blogImage || (imageLink = getRandomLinks())}
                   title={blog.title}
                   description={blog.description}
                 />

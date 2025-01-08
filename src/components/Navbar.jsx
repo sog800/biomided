@@ -10,11 +10,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 shadow-md ${
+      className={`fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300 ease-in-out ${
         theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Logo />
 
@@ -26,9 +26,9 @@ const Navbar = () => {
             className="p-2 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center mr-4"
           >
             {theme === "light" ? (
-              <FiSun size={15} className="text-yellow-500" />
+              <FiSun size={20} className="text-yellow-500" />
             ) : (
-              <FiMoon size={15} className="text-blue-500" />
+              <FiMoon size={20} className="text-blue-500" />
             )}
           </button>
 
@@ -44,41 +44,62 @@ const Navbar = () => {
           </Link>
         </ul>
 
-      {/* Hamburger Menu for Mobile */}
-      <button
-        className="md:hidden text-emerald-600 p-4 text-2xl text-right"  
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        ☰
-      </button>
+        {/* Hamburger Menu for Mobile */}
+        <button
+          className="md:hidden text-emerald-600 p-4 text-2xl"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          ☰
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
+      <div
+        className={`md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transform ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-500 ease-in-out`}
+        onClick={() => setIsMenuOpen(false)}
+      >
         <div
-          className={`md:hidden py-2 space-y-2 ${
-            theme === "light"
-              ? "bg-emerald-50 text-gray-900"
-              : "bg-gray-800 text-white"
-          }`}
+          className={`bg-emerald-50 text-gray-900 w-3/4 sm:w-1/2 md:w-1/3 h-full p-6 transform ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-500 ease-in-out`}
         >
-          <Link to="/" className="block hover:underline hover:text-sky-500">
-            Home
-          </Link>
-          <Link
-            to="/blogs"
-            className="block hover:underline hover:text-sky-500"
-          >
-            Blogs
-          </Link>
-          <Link
-            to="/contact"
-            className="block hover:underline hover:text-sky-500"
-          >
-            Contact
-          </Link>
+          <div className="flex justify-between items-center mb-6">
+            <Logo />
+            <button
+              className="text-2xl"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              &times;
+            </button>
+          </div>
+          <ul className="space-y-6">
+            <Link
+              to="/"
+              className="block text-lg hover:underline hover:text-sky-500"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/blogs"
+              className="block text-lg hover:underline hover:text-sky-500"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blogs
+            </Link>
+            <Link
+              to="/about"
+              className="block text-lg hover:underline hover:text-sky-500"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </Link>
+            
+          </ul>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

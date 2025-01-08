@@ -1,5 +1,5 @@
 function handleLikes(isLiked, likes, setLikes, setIsLiked, id) {
-  const url = `http://127.0.0.1:8000/hobbies/blog/${id}/likes/`;
+  const url = `http://127.0.0.1:8000/bloggs/api/like-blog/${id}/`;
 
   fetch(url, {
     method: 'PUT',

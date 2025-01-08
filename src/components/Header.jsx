@@ -19,7 +19,7 @@ const Header = ({ theme }) => {
 
         {/* Subheading */}
         <p className="text-base sm:text-lg text-emerald-500 mb-6 animate-slide-in ">
-          Discover the secrets of body health, natural beauty, and biomeds with
+          Discover the secrets of body health, natural beauty,<br/> and biomeds with
           expert insights and tips.
         </p>
         <div>

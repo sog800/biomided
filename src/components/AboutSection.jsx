@@ -17,17 +17,16 @@ const AboutSection = ({ theme }) => {
         </h2>
         <p
           className={`text-lg ${
-            theme === "dark" ? "text-gray-300" : "text-gray-700"
-          }`}
+            theme === "dark" ? "text-gray-300" : "text-gray-700"} border-b-2 border-gray-300`}
         >
-          Hi, I’m Daniel Cyrus Longwe, I hold a diploma in biomedical science
+          <em>Hi, I’m <stron>Daniel Cyrus Longwe</stron>, I hold a diploma in biomedical science
           and am deeply passionate about sharing practical insights on health,
           beauty, and natural living. Through a clear understanding of how our
           amazing bodies work and function, I aim to empower you with knowledge
           that makes a real difference. Join me on this exciting journey as we
           explore the best tips, backed by science and experience, to help you
           achieve a healthier, happier, and more vibrant life. Let’s unlock the
-          secrets to feeling your best—naturally!
+          secrets to feeling your best—naturally!</em>
         </p>
       </div>
     </section>

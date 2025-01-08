@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
 import AsideCard from "../components/AsideCard";
 import FeedbackSection from "../components/FeedbackSection";
 import Footer from "../components/Footer";
@@ -8,7 +7,6 @@ import Navbar from "../components/Navbar";
 import handleLikes from "../utils/handlelikes";
 import { HiOutlineThumbUp } from "react-icons/hi";
 
-
 const BlogReadingPage = ({ theme }) => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
@@ -16,7 +14,7 @@ const BlogReadingPage = ({ theme }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/hobbies/blogs/")
+    fetch("http://127.0.0.1:8000/bloggs/api/all-blogs")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch blog data.");
@@ -28,7 +26,6 @@ const BlogReadingPage = ({ theme }) => {
         const foundBlog = data.find((blog) => String(blog.id) === cleanedId);
         if (foundBlog) {
           setBlog(foundBlog);
-          setLikes(foundBlog.likes); // Initialize likes from fetched data
         } else {
           setError("Blog not found.");
         }
@@ -40,7 +37,6 @@ const BlogReadingPage = ({ theme }) => {
       });
   }, [id]);
 
-  // Like and heart interaction states
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -54,7 +50,6 @@ const BlogReadingPage = ({ theme }) => {
     }
   });
 
-  // Comments state
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
 
@@ -84,7 +79,7 @@ const BlogReadingPage = ({ theme }) => {
         <Navbar theme={theme} />
       </header>
       <section className={`pt-20 mt-16 py-8 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-emerald-50 text-center"}`}>
-        <h1 className="text-4xl font-extrabold text-emerald-600 text-center">{blog.title}</h1>
+        <h1 className="text-5xl font-extrabold text-emerald-600 text-center">{blog.title}</h1>
       </section>
       <section className={`py-16 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-emerald-50"}`}>
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -99,17 +94,15 @@ const BlogReadingPage = ({ theme }) => {
             <div className="flex items-center gap-4 mb-8">
               <img src={blog.authorImage} alt={blog.author} className="w-16 h-16 rounded-full" />
               <div>
-                <h3 className="text-xl font-semibold">Author: {blog.author_name}</h3>
+                <h3 className="text-2xl font-semibold">Author: {blog.author}</h3>
                 <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>{blog.bio}</p>
-                <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>Posted at: {blog.uploadDate}</p>
-                <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
-                  <i>{blog.description}</i>
-                </p>
+                <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>Posted at: {blog.created_at}</p>
+                <p className={`${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}><i>{blog.description}</i></p>
               </div>
             </div>
             <div className="mb-8">
               <div className={`${theme === "dark" ? "text-white" : "text-black"} text-lg leading-relaxed font-serif`}>
-                {blog.blogBody.split("<br><br>").map((paragraph, index) => (
+                {blog.content.split("\r\n\r").map((paragraph, index) => (
                   <p key={index} className="mb-6">
                     {paragraph.split("<br>").map((line, lineIndex) => (
                       <React.Fragment key={lineIndex}>
@@ -127,7 +120,7 @@ const BlogReadingPage = ({ theme }) => {
               </button>
             </div>
             <div className="mb-8">
-              <h3 className="text-xl font-bold mb-4">Comments</h3>
+              <h3 className="text-2xl font-bold mb-4">Comments</h3>
               <div className="space-y-4">
                 {comments.map((comment, index) => (
                   <div key={index} className={`p-4 shadow-md rounded-lg ${theme === "dark" ? "bg-gray-700 text-white" : "bg-white"}`}>
