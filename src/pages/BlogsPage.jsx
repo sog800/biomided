@@ -14,14 +14,13 @@ const AsideCard = ({ title, description }) => (
   </div>
 );
 
-var imageLink = ''
-
+var imageLink = "";
 
 const BlogsPage = ({ theme }) => {
   const [blogs, setBlogs] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://127.0.0.1:8000/bloggs/api/all-blogs")
+    fetch("https://biomided.onrender.com/bloggs/api/all-blogs")
       .then((response) => response.json())
       .then((data) => setBlogs(data))
       .catch((error) => console.error(error));
@@ -79,8 +78,6 @@ const BlogsPage = ({ theme }) => {
               ))}
             </div>
           </div>
-
-          
         </div>
       </section>
 

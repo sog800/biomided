@@ -21,7 +21,7 @@ const HomePage = ({ theme }) => {
   };
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/bloggs/api/all-blogs", {
+    fetch("https://biomided.onrender.com/bloggs/api/all-blogs", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
