@@ -24,12 +24,12 @@ const Header = ({ theme }) => {
         </p>
         <div>
           {/* Call-to-Action */}
-          <a
-            href="/blogs"
+          <Link
+            to="/blogs"
             className="inline-block px-6 py-3 bg-sky-500 text-white text-lg font-bold rounded-lg hover:bg-sky-600 transition transform hover:scale-105 animate-bounce"
           >
             Explore Now
-          </a>
+          </Link>
           <div className="mt-6 text-center text-sm text-gray-500 animate-pulse rounded-lg p-4 border inline-block  ">
             <h3>The purpose of the earth, is to give and receive love.</h3>
             <p>
