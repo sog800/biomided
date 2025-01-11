@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo"; // Assuming Logo is a simple component
 import { FiMoon, FiSun } from "react-icons/fi";
 import { ThemeContext } from "../App"; // Import ThemeContext
+import { FiUser } from "react-icons/fi";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext); // Use context to get the theme and toggle function
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isLoggedIn = localStorage.getItem('token');
 
   return (
     <nav
@@ -20,18 +22,6 @@ const Navbar = () => {
 
         {/* Navigation Links and Theme Toggle */}
         <ul className="hidden md:flex items-center space-x-6">
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center mr-4"
-          >
-            {theme === "light" ? (
-              <FiSun size={20} className="text-yellow-500" />
-            ) : (
-              <FiMoon size={20} className="text-blue-500" />
-            )}
-          </button>
-
           {/* Links */}
           <Link to="/" className="hover:underline hover:text-sky-500">
             Home
@@ -42,6 +32,38 @@ const Navbar = () => {
           <Link to="/about" className="hover:underline hover:text-sky-500">
             About
           </Link>
+
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="p-1 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center mr-4"
+          >
+            {theme === "light" ? (
+              <FiSun size={20} className="text-yellow-500" />
+            ) : (
+              <FiMoon size={20} className="text-blue-500" />
+            )}
+          </button>
+
+          {/* Conditionally render links based on if the user is logged in */}
+          {isLoggedIn ? (
+            // If user is logged in, show profile link
+            <li>
+              <Link to="/profile" className="border rounded-full p-1">
+                <FiUser />
+              </Link>
+            </li>
+          ) : (
+            // If user is not logged in, show login and signup links
+            <>
+              <li>
+                <Link to="/login" className="text-white p-2">Login</Link>
+              </li>
+              <li>
+                <Link to="/register" className="text-white p-2">Sign Up</Link>
+              </li>
+            </>
+          )}
         </ul>
 
         {/* Hamburger Menu for Mobile */}
@@ -67,10 +89,7 @@ const Navbar = () => {
         >
           <div className="flex justify-between items-center mb-6">
             <Logo />
-            <button
-              className="text-2xl"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <button className="text-2xl" onClick={() => setIsMenuOpen(false)}>
               &times;
             </button>
           </div>
@@ -96,7 +115,36 @@ const Navbar = () => {
             >
               About
             </Link>
-            
+
+            {/* Conditionally render links based on if the user is logged in */}
+            {isLoggedIn ? (
+              // If user is logged in, show profile link
+              <Link
+                to="/profile"
+                className="block text-lg hover:underline hover:text-sky-500"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Profile
+              </Link>
+            ) : (
+              // If user is not logged in, show login and signup links
+              <>
+                <Link
+                  to="/login"
+                  className="block text-lg hover:underline hover:text-sky-500"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="block text-lg hover:underline hover:text-sky-500"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </ul>
         </div>
       </div>

@@ -7,6 +7,10 @@ import BlogReadingPage from "./pages/BlogReadingPage";
 import Navbar from "./components/Navbar";
 import React from "react";
 import AboutPage from "./pages/AboutPage";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 
 export const ThemeContext = createContext(null);
 
@@ -38,6 +42,9 @@ function App() {
           <Route path="/blogs" element={<BlogsPage theme={theme} />} />
             <Route path="/blogs/:id" element={<BlogReadingPage theme={theme} />} />
             <Route path="/about" element = {<AboutPage theme={theme} />} />
+            <Route Path="/login" element = {<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element = {<Profile />} />
           </Routes>
         </Router>
       </div>

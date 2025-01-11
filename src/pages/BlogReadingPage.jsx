@@ -14,7 +14,7 @@ const BlogReadingPage = ({ theme }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://biomided.onrender.com/bloggs/api/all-blogs")
+    fetch("http://127.0.0.1:8000/blog/blogposts/ ", {method: 'GET'})
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch blog data.");
