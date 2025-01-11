@@ -8,7 +8,7 @@ import { FiUser } from "react-icons/fi";
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext); // Use context to get the theme and toggle function
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isLoggedIn = localStorage.getItem('token');
+  const isLoggedIn = localStorage.getItem("token");
 
   return (
     <nav
@@ -57,13 +57,28 @@ const Navbar = () => {
             // If user is not logged in, show login and signup links
             <>
               <li>
-                <Link to="/login" className="text-white p-2">Login</Link>
+                <Link to="/login" className="text-white p-2">
+                  Login
+                </Link>
               </li>
               <li>
-                <Link to="/register" className="text-white p-2">Sign Up</Link>
+                <Link to="/register" className="text-white p-2">
+                  Sign Up
+                </Link>
               </li>
             </>
           )}
+
+          <button
+            onClick={toggleTheme}
+            className="p-1 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center mr-4"
+          >
+            {theme === "light" ? (
+              <FiSun size={20} className="text-yellow-500" />
+            ) : (
+              <FiMoon size={20} className="text-blue-500" />
+            )}
+          </button>
         </ul>
 
         {/* Hamburger Menu for Mobile */}

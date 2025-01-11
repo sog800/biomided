@@ -6,10 +6,34 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic client-side validation
+    if (!email || !password) {
+      setError("Email and password are required.");
+      setSuccess("");
+      return;
+    }
+
+    // Simple email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      setSuccess("");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      setSuccess("");
+      return;
+    }
+
     const loginData = { email, password };
+    setIsLoading(true);
 
     try {
       const response = await axios.post(
@@ -26,6 +50,8 @@ const Login = () => {
         setError("An error occurred. Please try again later.");
       }
       setSuccess("");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -43,6 +69,7 @@ const Login = () => {
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={isLoading} // Disable input when loading
             />
           </div>
           <div className="mb-4">
@@ -52,13 +79,15 @@ const Login = () => {
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading} // Disable input when loading
             />
           </div>
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md"
+            disabled={isLoading} // Disable button when loading
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
