@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -32,10 +31,19 @@ const Register = () => {
     const userData = { username, email, password };
 
     try {
-      const response = await axios.post(
-        "https://biomidedbackend.onrender.com/auth/register", 
-        userData
-      );
+      const response = await fetch("https://biomidedbackend.onrender.com/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration failed.");
+      }
+
+      const data = await response.json();
       setSuccess("Registration successful! Please log in.");
       setError("");
       setUsername("");
