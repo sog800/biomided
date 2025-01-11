@@ -20,7 +20,7 @@ const BlogsPage = ({ theme }) => {
   const [blogs, setBlogs] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://biomidedbackend.onrender.com/blog/blogposts/", { // Updated URL
+    fetch("https://biomidedbackend.onrender.com/blog/all-blogs", { // Updated URL
       method: 'GET',
     })
       .then((response) => response.json())

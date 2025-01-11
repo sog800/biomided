@@ -44,7 +44,7 @@ function App() {
             <Route path="/about" element = {<AboutPage theme={theme} />} />
             <Route Path="/login" element = {<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element = {<Profile />} />
+            <Route path="/profile" element = {<Profile theme={theme} />} />
           </Routes>
         </Router>
       </div>

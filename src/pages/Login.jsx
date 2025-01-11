@@ -37,7 +37,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://biomidedbackend.onrender.com/api/auth/login/",
+        "https://biomidedbackend.onrender.com/auth/login",
         loginData
       );
       setSuccess("Login successful!");

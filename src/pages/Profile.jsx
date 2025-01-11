@@ -1,17 +1,16 @@
-export default function LoginRedirect() {
-    const handleRedirect = () => {
-      window.location.href = "https://biomided.onrender.com/api/login"; // Replace with your backend endpoint
-    };
+import Navbar from "../components/Navbar";
+
+export default function Profile({theme}) {
+    
   
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <button
-          onClick={handleRedirect}
-          className="p-4 bg-blue-500 text-white rounded shadow-md"
-        >
-          Go to Login Page
-        </button>
+      <>
+        <Navbar theme={theme} />
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <h1>THIS PAGE IS UNDER CONSTRUCTION</h1>
       </div>
+      </>
+      
     );
   }
   

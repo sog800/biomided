@@ -8,17 +8,48 @@ const Register = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState("");
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!username || !email || !password) {
+      setError("All fields are required.");
+      setSuccess("");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      setSuccess("");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError("Password must be at least 8 characters long.");
+      setSuccess("");
+      return;
+    }
+
     const userData = { username, email, password };
 
     try {
       const response = await axios.post(
-        "https://biomidedBackend.onrender.com/api/auth/register/",
+        "https://biomidedbackend.onrender.com/auth/register", // Fixed URL
         userData
       );
-      setSuccess("Registration successful!");
+      setSuccess("Registration successful! Please log in.");
       setError(null);
+      setUsername("");
+      setEmail("");
+      setPassword("");
     } catch (error) {
       if (error.response && error.response.data) {
         setError(error.response.data.detail || "Registration failed! Please try again.");
@@ -37,8 +68,14 @@ const Register = () => {
         {success && <p className="text-green-500 mb-2">{success}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium">Username</label>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium"
+            >
+              Username
+            </label>
             <input
+              id="username"
               type="text"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={username}
@@ -46,8 +83,14 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium"
+            >
+              Email
+            </label>
             <input
+              id="email"
               type="email"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={email}
@@ -55,8 +98,14 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium"
+            >
+              Password
+            </label>
             <input
+              id="password"
               type="password"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={password}

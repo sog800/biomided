@@ -12,10 +12,11 @@ const BlogReadingPage = ({ theme }) => {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [likes, setLikes] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    fetch(`https://biomidedbackend.onrender.com/blog/blogposts/${id}/`, {
-      // Correct URL
+    fetch(`https://biomidedbackend.onrender.com/blog/blog/${id}/`, {
       method: "GET",
     })
       .then((response) => {
@@ -26,6 +27,11 @@ const BlogReadingPage = ({ theme }) => {
       })
       .then((data) => {
         setBlog(data);
+        setLikes(data.blog_likes); // Set initial likes from the blog data
+        const savedLike = localStorage.getItem(`isLiked-${id}`);
+        if (savedLike) {
+          setIsLiked(JSON.parse(savedLike)); // Parse boolean from localStorage
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -34,27 +40,9 @@ const BlogReadingPage = ({ theme }) => {
       });
   }, [id]);
 
-  const [likes, setLikes] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
-
-  const likeStatus = () => {
-    localStorage.setItem("isLiked", isLiked);
-  };
-  useEffect(() => {
-    const savedLike = localStorage.getItem("isLiked");
-    if (savedLike) {
-      setIsLiked(savedLike);
-    }
-  });
-
-  const [comments, setComments] = useState([]);
-  const [commentInput, setCommentInput] = useState("");
-
-  const handleAddComment = () => {
-    if (commentInput.trim()) {
-      setComments((prev) => [...prev, commentInput]);
-      setCommentInput("");
-    }
+  const handleLikeClick = () => {
+    handleLikes(isLiked, likes, setLikes, setIsLiked, id); // Update backend
+    localStorage.setItem(`isLiked-${id}`, JSON.stringify(!isLiked)); // Save like state
   };
 
   if (loading) {
@@ -87,50 +75,10 @@ const BlogReadingPage = ({ theme }) => {
         }`}
       >
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <aside className="hidden lg:block lg:col-span-2">
-            <div className="space-y-6">{/* Sidebar content */}</div>
-          </aside>
           <div className="lg:col-span-8">
             <div className="flex items-center gap-4 mb-8">
-              <img
-                src={blog.authorImage}
-                alt={blog.author}
-                className="w-16 h-16 rounded-full"
-              />
-              <div>
-                <h3 className="text-2xl font-semibold">
-                  Author: {blog.author}
-                </h3>
-                <p
-                  className={`${
-                    theme === "dark" ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  {blog.bio}
-                </p>
-                <p
-                  className={`${
-                    theme === "dark" ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Posted at: {blog.created_at}
-                </p>
-              </div>
-            </div>
-            <div className="mb-8">
-              <div
-                className={`${
-                  theme === "dark" ? "text-white" : "text-black"
-                } text-lg leading-relaxed font-serif`}
-              >
-                {blog.content}
-              </div>
-            </div>
-            <div className="flex items-center gap-4 mb-8">
               <button
-                onClick={() =>
-                  handleLikes(isLiked, likes, setLikes, setIsLiked, id)
-                }
+                onClick={handleLikeClick}
                 className={`flex items-center gap-2 text-3xl ${
                   isLiked ? "text-blue-600" : "text-gray-600"
                 }`}
@@ -140,46 +88,7 @@ const BlogReadingPage = ({ theme }) => {
             </div>
             <div className="mb-8">
               <h3 className="text-2xl font-bold mb-4">Comments</h3>
-              <div className="space-y-4">
-                {comments.map((comment, index) => (
-                  <div
-                    key={index}
-                    className={`p-4 shadow-md rounded-lg ${
-                      theme === "dark" ? "bg-gray-700 text-white" : "bg-white"
-                    }`}
-                  >
-                    {comment}
-                  </div>
-                ))}
-                {comments.length === 0 && (
-                  <p
-                    className={`${
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    No comments yet. Be the first to comment!
-                  </p>
-                )}
-              </div>
-              <div className="mt-4 flex gap-2">
-                <input
-                  type="text"
-                  value={commentInput}
-                  onChange={(e) => setCommentInput(e.target.value)}
-                  placeholder="Add a comment..."
-                  className={`flex-1 p-2 border rounded-lg ${
-                    theme === "dark"
-                      ? "bg-gray-700 text-white border-gray-600"
-                      : "border-gray-300"
-                  }`}
-                />
-                <button
-                  onClick={handleAddComment}
-                  className="bg-emerald-600 text-white px-4 py-2 rounded-lg"
-                >
-                  Comment
-                </button>
-              </div>
+              {/* Comments Section */}
             </div>
           </div>
         </div>
@@ -191,3 +100,4 @@ const BlogReadingPage = ({ theme }) => {
 };
 
 export default BlogReadingPage;
+

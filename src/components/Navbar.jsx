@@ -4,6 +4,7 @@ import Logo from "./Logo"; // Assuming Logo is a simple component
 import { FiMoon, FiSun } from "react-icons/fi";
 import { ThemeContext } from "../App"; // Import ThemeContext
 import { FiUser } from "react-icons/fi";
+import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext); // Use context to get the theme and toggle function
@@ -47,14 +48,15 @@ const Navbar = () => {
 
           {/* Conditionally render links based on if the user is logged in */}
           {isLoggedIn ? (
-            // If user is logged in, show profile link
-            <li>
-              <Link to="/profile" className="border rounded-full p-1">
-                <FiUser />
-              </Link>
-            </li>
+            <div>
+              <li>
+                <Link to="/profile" className="border rounded-full p-1">
+                  <FiUser />
+                </Link>
+              </li>
+              <LogoutButton />
+            </div>
           ) : (
-            // If user is not logged in, show login and signup links
             <>
               <li>
                 <Link to="/login" className="text-white p-2">
@@ -68,17 +70,6 @@ const Navbar = () => {
               </li>
             </>
           )}
-
-          <button
-            onClick={toggleTheme}
-            className="p-1 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center mr-4"
-          >
-            {theme === "light" ? (
-              <FiSun size={20} className="text-yellow-500" />
-            ) : (
-              <FiMoon size={20} className="text-blue-500" />
-            )}
-          </button>
         </ul>
 
         {/* Hamburger Menu for Mobile */}
@@ -133,16 +124,11 @@ const Navbar = () => {
 
             {/* Conditionally render links based on if the user is logged in */}
             {isLoggedIn ? (
-              // If user is logged in, show profile link
-              <Link
-                to="/profile"
-                className="block text-lg hover:underline hover:text-sky-500"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Profile
-              </Link>
+              <div>
+                <LogoutButton />
+                {/* Remove Profile link from here */}
+              </div>
             ) : (
-              // If user is not logged in, show login and signup links
               <>
                 <Link
                   to="/login"
