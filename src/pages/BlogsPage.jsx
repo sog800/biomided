@@ -20,16 +20,17 @@ const BlogsPage = ({ theme }) => {
   const [blogs, setBlogs] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://127.0.0.1:8000/blog/blogposts/ ", {method: 'GET'})
-      
+    fetch("https://biomidedbackend.onrender.com/blog/blogposts/", { // Updated URL
+      method: 'GET',
+    })
       .then((response) => response.json())
       .then((data) => setBlogs(data))
       .catch((error) => console.error(error));
   }, []);
 
   const asideContent = [
-    { title: "Sponsored Ad", description: "   ads  !" },
-    { title: "Newsletter Signup", description: "   ads  ." },
+    { title: "Sponsored Ad", description: "ads!" },
+    { title: "Newsletter Signup", description: "ads." },
   ];
 
   return (
@@ -39,14 +40,10 @@ const BlogsPage = ({ theme }) => {
       </header>
 
       <section
-        className={`py-8 mt-10 ${
-          theme === "dark" ? "bg-gray-800" : "bg-emerald-50"
-        } text-center`}
+        className={`py-8 mt-10 ${theme === "dark" ? "bg-gray-800" : "bg-emerald-50"} text-center`}
       >
         <h1
-          className={`text-4xl font-extrabold ${
-            theme === "dark" ? "text-white" : "text-emerald-600"
-          }`}
+          className={`text-4xl font-extrabold ${theme === "dark" ? "text-white" : "text-emerald-600"}`}
         >
           Explore Blogs 📚
         </h1>
@@ -59,9 +56,7 @@ const BlogsPage = ({ theme }) => {
       </section>
 
       <section
-        className={`py-16 ${
-          theme === "dark" ? "bg-gray-800" : "bg-emerald-50"
-        }`}
+        className={`py-16 ${theme === "dark" ? "bg-gray-800" : "bg-emerald-50"}`}
       >
         <div className="container mx-auto justify-center px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-2"></div>
@@ -83,7 +78,6 @@ const BlogsPage = ({ theme }) => {
       </section>
 
       <FeedbackSection theme={theme} />
-
       <Footer />
     </>
   );

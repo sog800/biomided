@@ -1,0 +1,5 @@
+GET https://biomidedbackend.onrender.com/blog/blogposts/
+POST https://biomidedbackend.onrender.com/blog/blogposts/
+GET https://biomidedbackend.onrender.com/blog/blogposts/{id}/
+PUT https://biomidedbackend.onrender.com/blog/blogposts/{id}/
+DELETE https://biomidedbackend.onrender.com/blog/blogposts/{id}/

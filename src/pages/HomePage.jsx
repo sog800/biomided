@@ -17,11 +17,11 @@ const HomePage = ({ theme }) => {
   var imageLink = "";
 
   const handleClick = () => {
-    navigate("/blogs"); // Removed the colon before blogId
+    navigate("/blogs"); // Redirect to /blogs page when clicked
   };
 
   useEffect(() => {
-    fetch("https://biomided.onrender.com/bloggs/api/all-blogs", {
+    fetch("https://biomidedbackend.onrender.com/blog/blogposts/", { // Corrected URL
       method: "GET",
       headers: {
         "Content-Type": "application/json",
