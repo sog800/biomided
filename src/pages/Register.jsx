@@ -4,13 +4,14 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // New state for confirm password
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !confirmPassword) {
       setError("All fields are required.");
       setSuccess("");
       return;
@@ -24,6 +25,12 @@ const Register = () => {
 
     if (password.length < 8) {
       setError("Password must be at least 8 characters.");
+      setSuccess("");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
       setSuccess("");
       return;
     }
@@ -49,6 +56,7 @@ const Register = () => {
       setUsername("");
       setEmail("");
       setPassword("");
+      setConfirmPassword(""); // Reset confirm password
     } catch (error) {
       setError("An error occurred. Please try again.");
       setSuccess("");
@@ -87,6 +95,15 @@ const Register = () => {
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium">Confirm Password</label>
+            <input
+              type="password"
+              className="w-full p-2 mt-1 border border-gray-300 rounded-md"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
           <button
