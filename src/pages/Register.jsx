@@ -31,7 +31,7 @@ const Register = () => {
     const userData = { username, email, password };
 
     try {
-      const response = await fetch("https://biomidedbackend.onrender.com/auth/register", {
+      const response = await fetch("https://biomidedbackend.onrender.com/auth/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const HomePage = ({ theme }) => {
   };
 
   useEffect(() => {
-    fetch("https://biomidedbackend.onrender.com/blog/all-blogs", { // Corrected URL
+    fetch("https://biomidedbackend.onrender.com/blog/all-blogs/", { // Corrected URL
       method: "GET",
       headers: {
         "Content-Type": "application/json",
