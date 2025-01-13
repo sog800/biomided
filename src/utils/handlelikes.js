@@ -1,16 +1,16 @@
-function handleLikes(isLiked, likes, setLikes, setIsLiked, id) {
-  const url = `https://biomided.onrender.com/bloggs/api/like-blog/${id}/`;
+export default function handleLikes(isLiked, likes, setLikes, setIsLiked, id) {
+  const url = `https://biomidedbackend.onrender.com/blog/like-blog/${id}/`;
 
   fetch(url, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ isLiked }), // Send the current like state
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error('Failed to update likes.');
+        throw new Error("Failed to update likes.");
       }
       return response.json();
     })
@@ -20,10 +20,6 @@ function handleLikes(isLiked, likes, setLikes, setIsLiked, id) {
       setIsLiked(!isLiked); // Toggle the like state after successful response
     })
     .catch((error) => {
-      console.error('Error updating likes:', error);
+      console.error("Error updating likes:", error);
     });
 }
-
-
-
-export default handleLikes;

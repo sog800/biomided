@@ -27,4 +27,4 @@ dist/
 *.sln
 *.sw?
 
-endpoints.txt/
+keep/

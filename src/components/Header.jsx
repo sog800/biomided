@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 const Header = ({ theme }) => {
   return (
     <header
-      className={`relative py-24 ${
+      className={`relative py-24 mb-16 ${
         theme === "dark" ? "bg-gray-800" : "bg-emerald-50"
       } transition-all duration-500 ease-in-out [clip-path:polygon(0_0,100%_0,100%_90%,50%_100%,0_90%)] h-screen`}
     >
       <div className="container mx-auto px-4 text-center">
-        {/* Navbar */}
-        <Navbar theme={theme} />
 
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-5xl font-extrabold text-emerald-600 mb-4 animate-fade-in mt-12">
@@ -20,8 +18,7 @@ const Header = ({ theme }) => {
 
         {/* Subheading */}
         <p className="text-base sm:text-lg text-emerald-500 mb-6 animate-slide-in ">
-          Discover the secrets of body health, natural beauty,<br/> and biomeds with
-          expert insights and tips.
+          Discovering the secrets of becoming a super human
         </p>
         <div>
           {/* Call-to-Action */}
@@ -36,9 +33,7 @@ const Header = ({ theme }) => {
             <p>
               Life isn’t about stress, loneliness, or constant trouble. Sure,
               people say, “That’s just life,” but they’re wrong. Life is about
-              love, joy, and peace. The bad stuff? That’s just what happens when
-              we forget the truth. Together, we can make the world better by
-              sharing truth, love, and happiness. Let’s explore health, beauty,
+              love, joy, and peace. Let’s explore health, beauty,
               and wisdom—and spread the good vibes everywhere.
             </p>
           </div>

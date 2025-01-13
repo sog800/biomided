@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo"; // Assuming Logo is a simple component
 import { FiMoon, FiSun } from "react-icons/fi";
 import { ThemeContext } from "../App"; // Import ThemeContext
-import { FiUser } from "react-icons/fi";
+import { FiUserCheck } from "react-icons/fi";
 import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300 ease-in-out mb-16 ${
         theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"
       }`}
     >
@@ -21,7 +21,7 @@ const Navbar = () => {
         {/* Logo */}
         <Logo />
 
-        {/* Navigation Links and Theme Toggle */}
+        {/* Navigation Links */}
         <ul className="hidden md:flex items-center space-x-6">
           {/* Links */}
           <Link to="/" className="hover:underline hover:text-sky-500">
@@ -34,24 +34,12 @@ const Navbar = () => {
             About
           </Link>
 
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-1 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center mr-4"
-          >
-            {theme === "light" ? (
-              <FiSun size={20} className="text-yellow-500" />
-            ) : (
-              <FiMoon size={20} className="text-blue-500" />
-            )}
-          </button>
-
           {/* Conditionally render links based on if the user is logged in */}
           {isLoggedIn ? (
-            <div>
+            <div className="flex items-center space-x-4">
               <li>
-                <Link to="/profile" className="border rounded-full p-1">
-                  <FiUser />
+                <Link to="/profile" className="text-lg hover:text-sky-500">
+                  <FiUserCheck className="inline-block text-2xl" />
                 </Link>
               </li>
               <LogoutButton />
@@ -59,18 +47,32 @@ const Navbar = () => {
           ) : (
             <>
               <li>
-                <Link to="/login" className="text-white p-2">
+                <Link to="/login" className="hover:underline hover:text-sky-500">
                   Login
                 </Link>
               </li>
               <li>
-                <Link to="/register" className="text-white p-2">
+                <Link to="/register" className="hover:underline hover:text-sky-500">
                   Sign Up
                 </Link>
               </li>
             </>
           )}
         </ul>
+
+        {/* Theme Toggle Button moved to the far right */}
+        <div className="flex items-center ml-4">
+          <button
+            onClick={toggleTheme}
+            className="p-1 rounded-full border-2 border-gray-500 hover:border-gray-700 flex items-center"
+          >
+            {theme === "light" ? (
+              <FiSun size={20} className="text-yellow-500" />
+            ) : (
+              <FiMoon size={20} className="text-blue-500" />
+            )}
+          </button>
+        </div>
 
         {/* Hamburger Menu for Mobile */}
         <button
@@ -124,9 +126,15 @@ const Navbar = () => {
 
             {/* Conditionally render links based on if the user is logged in */}
             {isLoggedIn ? (
-              <div>
+              <div className="">
+                <Link
+                  to="/profile"
+                  className="block text-lg hover:text-sky-500"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <FiUserCheck className="inline-block text-4xl my-3 text" />
+                </Link>
                 <LogoutButton />
-                {/* Remove Profile link from here */}
               </div>
             ) : (
               <>
