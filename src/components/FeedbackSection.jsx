@@ -4,10 +4,29 @@ const FeedbackSection = ({ theme }) => {
   const [feedback, setFeedback] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleFeedbackSubmit = () => {
+  const handleFeedbackSubmit = async () => {
     if (feedback.trim()) {
-      setMessage("Thank you for your feedback!");
-      setFeedback("");
+      try {
+        const response = await fetch("https://biomidedbackend.onrender.com/blog/feedback/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ feedback }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setMessage("Thank you for your feedback!");
+        } else {
+          setMessage(data.detail || "An error occurred while submitting feedback.");
+        }
+      } catch (error) {
+        setMessage("An error occurred: " + error.message);
+      }
+
+      setFeedback(""); // Clear the textarea after submission
     } else {
       setMessage("Please enter your feedback before submitting.");
     }

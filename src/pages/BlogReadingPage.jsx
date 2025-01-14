@@ -87,7 +87,7 @@ const BlogReadingPage = ({ theme }) => {
             transition={{ duration: 1, delay: 0.3 }}
           >
             <img
-              src={`https://biomidedbackend.onrender.com${blog.author_image}`}
+              src={`{blog.author_image}`}
               alt={blog.author_name}
               className="rounded-full object-cover mr-4"
               style={{ width: "200px", height: "200px" }}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -7,6 +8,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,24 +25,37 @@ const Register = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json(); // Parse detailed errors from the backend
-        setErrors(errorData); // Set errors in state
+        const errorData = await response.json();
+        setErrors(errorData); // Set field-specific errors
         setSuccess("");
         return;
       }
 
       const data = await response.json();
-      setSuccess("Registration successful! Please log in.");
-      redirect('login')
+      setSuccess("Registration successful! Redirecting to login...");
       setErrors({});
       setUsername("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+
+      // Navigate to the login page after a short delay
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
-      setErrors({ general: "An error occurred. Please try again." });
+      setErrors({ general: "An error occurred. Please try again later." });
       setSuccess("");
     }
+  };
+
+  const handleInputChange = (field, value) => {
+    if (errors[field]) {
+      // Clear the error for the specific field as the user types
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+    if (field === "username") setUsername(value);
+    if (field === "email") setEmail(value);
+    if (field === "password") setPassword(value);
+    if (field === "confirmPassword") setConfirmPassword(value);
   };
 
   return (
@@ -56,7 +71,7 @@ const Register = () => {
               type="text"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => handleInputChange("username", e.target.value)}
             />
             {errors.username && <p className="text-red-500 text-sm">{errors.username[0]}</p>}
           </div>
@@ -66,7 +81,7 @@ const Register = () => {
               type="email"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleInputChange("email", e.target.value)}
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email[0]}</p>}
           </div>
@@ -76,7 +91,7 @@ const Register = () => {
               type="password"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handleInputChange("password", e.target.value)}
             />
             {errors.password && <p className="text-red-500 text-sm">{errors.password[0]}</p>}
           </div>
@@ -86,7 +101,7 @@ const Register = () => {
               type="password"
               className="w-full p-2 mt-1 border border-gray-300 rounded-md"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
             />
             {errors.confirm_password && (
               <p className="text-red-500 text-sm">{errors.confirm_password[0]}</p>
