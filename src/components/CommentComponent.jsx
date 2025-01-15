@@ -26,9 +26,9 @@ const CommentComponent = ({ postId, theme }) => {
     // Check if the token exists in localStorage
     const token = localStorage.getItem("token");
 
-    // Redirect to the login page if the token is not found
+    
     if (!token) {
-      window.location.href = "/login"; // Replace with your actual login page URL
+      setError('OOPS CANT COMENT > YOU ARE NOT LOGED IN'); // Replace with your actual login page URL
       return;
     }
 
