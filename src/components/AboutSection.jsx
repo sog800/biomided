@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion"; // Import framer-motion
+import { Link } from "react-router-dom";
 
 const AboutSection = ({ theme }) => {
   return (
@@ -8,68 +9,96 @@ const AboutSection = ({ theme }) => {
     >
       <div className="container mx-auto px-4 text-center">
         <motion.h2
-          className={`text-4xl font-bold ${theme === "dark" ? "text-white" : "text-emerald-600"} mb-4`}
+          className={`text-4xl font-bold ${theme === "dark" ? "text-white" : "text-emerald-600"} mb-6`}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          About the Author
+          Welcome to Our Blogging Community
         </motion.h2>
 
         <motion.p
-          className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-700"} border-b-2 border-gray-300`}
+          className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-700"} border-b-2 border-gray-300 pb-4`}
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
           <em>
-            Hi, I’m <strong>Daniel Cyrus Longwe</strong>, I hold a diploma in biomedical science
-            and am deeply passionate about sharing practical insights on health,
-            beauty, and natural living. Through a clear understanding of how our
-            amazing bodies work and function, I aim to empower you with knowledge
-            that makes a real difference. Join me on this exciting journey as we
-            explore the best tips, backed by science and experience, to help you
-            achieve a healthier, happier, and more vibrant life. Let’s unlock the
-            secrets to feeling your best—naturally!
+            We are passionate about sharing knowledge and experiences on health,
+            beauty, and natural living. This platform is not just about one voice—
+            it’s a community where like-minded individuals can come together to
+            share their unique perspectives and ideas. Whether you’re a seasoned
+            expert or just starting, we welcome you to join us in making a difference.
           </em>
         </motion.p>
 
-        {/* Animating the benefits of reading this blog */}
+        {/* Benefits Section */}
         <motion.div
-          className="mt-12 text-center"
+          className="mt-12"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <h3 className="text-2xl font-semibold text-emerald-600">How This Page Can Help Your Life</h3>
+          <h3
+            className={`text-2xl font-semibold ${
+              theme === "dark" ? "text-emerald-400" : "text-emerald-600"
+            }`}
+          >
+            Why Contribute to This Blog?
+          </h3>
           <motion.p
-            className="mt-4 text-lg text-gray-700"
+            className={`mt-4 text-lg ${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            }`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
           >
-            Reading this blog empowers you to make healthier, informed decisions
-            about your well-being. Discover insights on how your body functions and
-            how natural living can boost your energy, vitality, and happiness. Through
-            practical, science-backed advice, you will be equipped to live a more vibrant
-            life, free from unnecessary stress and struggles.
+            By sharing your knowledge, you can inspire and educate readers around
+            the world. Contributing to this blog allows you to showcase your
+            expertise, connect with a like-minded audience, and make a positive
+            impact on people’s lives.
           </motion.p>
         </motion.div>
 
-        {/* Engaging call to action */}
+        {/* Call to Action */}
         <motion.div
           className="mt-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          <motion.button
-            className="bg-emerald-600 text-white px-8 py-3 rounded-full text-lg font-bold transition transform hover:scale-105 hover:bg-emerald-700"
+          <motion.div
+            className="bg-emerald-600 text-white px-6 py-4 rounded-lg shadow-lg inline-block"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Start Reading Now
-          </motion.button>
+            <p>
+              Interested in blogging with us? Reach out to us via email at{" "}
+              <a
+                href="mailto:your-email@example.com"
+                className="underline hover:text-emerald-300"
+              >
+                daniellongwe800@gmail.com
+              </a>{" "}
+              or leave your details in the feedback section.
+            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Feedback Button */}
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.2 }}
+        >
+          <Link
+            to="/feedback"
+            className="bg-emerald-500 text-white px-8 py-3 rounded-full text-lg font-bold transition transform hover:scale-105 hover:bg-emerald-600"
+          >
+            Send Feedback
+          </Link>
         </motion.div>
       </div>
     </section>

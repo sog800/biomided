@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { ThemeContext } from "../App";
+import { motion } from "framer-motion";  // Import motion from framer-motion
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -74,45 +75,90 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-gray-800 text-white py-6 px-4">
-          <Link to="/" className="block mb-4 hover:text-sky-500">
-            Home
-          </Link>
-          <Link to="/blogs" className="block mb-4 hover:text-sky-500">
-            Blogs
-          </Link>
-          <Link to="/about" className="block mb-4 hover:text-sky-500">
-            About
-          </Link>
+      {/* Sidebar */}
+      <motion.div
+        className={`fixed top-0 left-0 h-full bg-gray-800 text-white w-64 p-4 md:hidden`}
+        initial={{ x: '-100%' }}
+        animate={{ x: isMenuOpen ? 0 : '-100%' }}
+        exit={{ x: '-100%' }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        {/* Sidebar Content */}
+        <div className="flex justify-between items-center mb-6">
+          <Logo />
+          <button
+            className="text-white text-2xl"
+            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+          >
+            &times;
+          </button>
+        </div>
+        {/* Mobile Links */}
+        <ul className="space-y-6">
+          <li>
+            <Link to="/" className="block text-lg hover:text-sky-500"
+            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/blogs" className="block text-lg hover:text-sky-500"
+            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+            >
+              Blogs
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="block text-lg hover:text-sky-500"
+            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+            >
+              About
+            </Link>
+          </li>
           {isLoggedIn ? (
             <>
-              <Link to="/profile" className="block mb-4 hover:text-sky-500">
-                Profile
-              </Link>
-              <button
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  window.location.reload();
-                }}
-                className="hover:text-red-500"
-              >
-                Logout
-              </button>
+              <li>
+                <Link to="/profile" className="block text-lg hover:text-sky-500"
+                onClick={() => setIsMenuOpen(false)} // Close the sidebar
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    setIsMenuOpen(false); // Close the sidebar
+                    window.location.reload();
+                  }}
+                  className="block text-lg hover:text-red-500"
+                >
+                  Logout
+                </button>
+              </li>
             </>
           ) : (
             <>
-              <Link to="/login" className="block mb-4 hover:text-sky-500">
-                Login
-              </Link>
-              <Link to="/register" className="block hover:text-sky-500">
-                Sign Up
-              </Link>
+              <li>
+                <Link to="/login" className="block text-lg hover:text-sky-500"
+                onClick={() => setIsMenuOpen(false)} // Close the sidebar
+                >
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" className="block text-lg hover:text-sky-500"
+                onClick={() => setIsMenuOpen(false)} // Close the sidebar
+                >
+                  Sign Up
+                </Link>
+              </li>
             </>
           )}
-        </div>
-      )}
+        </ul>
+      </motion.div>
+
     </nav>
   );
 };

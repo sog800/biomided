@@ -34,7 +34,7 @@ const FeedbackSection = ({ theme }) => {
 
   return (
     <section
-      className={`py-16 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}
+      className={`py-16 mt-16 ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}
     >
       <div className="container mx-auto px-4 text-center">
         <h2

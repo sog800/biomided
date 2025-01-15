@@ -10,6 +10,7 @@ import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import FeedbackSection from "./components/FeedbackSection";
 
 
 export const ThemeContext = createContext(null);
@@ -45,6 +46,7 @@ function App() {
             <Route path="/login" element = {<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element = {<Profile theme={theme} />} />
+            <Route path='/feedback' element = {<FeedbackSection/>} />
           </Routes>
         </Router>
       </div>

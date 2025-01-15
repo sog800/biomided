@@ -38,7 +38,7 @@ const BlogsPage = ({ theme }) => {
       
 
       <section
-        className={`py-8 mt-10 ${theme === "dark" ? "bg-gray-800" : "bg-emerald-50"} text-center mt-16`}
+        className={`py-8 mt-10 ${theme === "dark" ? "bg-gray-800" : "bg-emerald-50"} text-center mt-24`}
       >
         <h1
           className={`text-4xl font-extrabold ${theme === "dark" ? "text-white" : "text-emerald-600"}`}

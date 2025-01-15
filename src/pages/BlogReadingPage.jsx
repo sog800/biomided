@@ -87,14 +87,14 @@ const BlogReadingPage = ({ theme }) => {
             transition={{ duration: 1, delay: 0.3 }}
           >
             <img
-              src={`{blog.author_image}`}
+              src={`${blog.author_image}`}
               alt={blog.author_name}
-              className="rounded-full object-cover mr-4"
+              className="rounded-full mt-16 object-cover mr-4"
               style={{ width: "200px", height: "200px" }}
             />
             <div className="text-sm text-gray-200 mt-16">
-              <p>{blog.author_name}</p>
-              <p>Posted on {new Date(blog.posted_at).toLocaleDateString()}</p>
+              <p>Author:   {blog.author_name}</p>
+              <p>Posted on:  {new Date(blog.posted_at).toLocaleDateString()}</p>
             </div>
           </motion.div>
         </div>

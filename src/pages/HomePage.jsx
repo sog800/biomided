@@ -34,11 +34,11 @@ const HomePage = ({ theme }) => {
   }, []);
 
   return (
-    <>
+    <div className="mt-16">
       <Header theme={theme} />
 
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 text-center text-white">
+      <section className="relative  py-24 bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 text-center text-white">
         <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
         <div className="relative z-10">
           <h2 className="text-5xl sm:text-6xl font-extrabold mb-8 animate-fade-in tracking-wide">
@@ -101,7 +101,7 @@ const HomePage = ({ theme }) => {
 
       {/* Footer */}
       <Footer />
-    </>
+    </div>
   );
 };
 
