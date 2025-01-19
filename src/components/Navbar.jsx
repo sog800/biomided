@@ -1,39 +1,48 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { FiMoon, FiSun } from "react-icons/fi";
-import { ThemeContext } from "../App";
-import { motion } from "framer-motion";  // Import motion from framer-motion
+import { FiUser } from "react-icons/fi";
+import { motion } from "framer-motion"; // Import motion from framer-motion
+import { BiDonateHeart } from "react-icons/bi";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isLoggedIn = localStorage.getItem("token");
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 shadow-lg transition-all duration-300 ${
-        theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"
-      }`}
-    >
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full z-50 shadow-lg text-white bg-black">
+      <div className="lg:px-4 mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Logo />
+        <div className="hover:scale-105 transition-transform">
+          <Logo />
+        </div>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="hover:underline hover:text-sky-500">
+        <ul className="hidden md:flex items-center space-x-8 text-lg">
+          <Link
+            to="/"
+            className="hover:text-yellow-500 transition-colors"
+          >
             Home
           </Link>
-          <Link to="/blogs" className="hover:underline hover:text-sky-500">
+          <Link
+            to="/blogs"
+            className="hover:text-yellow-500 transition-colors"
+          >
             Blogs
           </Link>
-          <Link to="/about" className="hover:underline hover:text-sky-500">
+          <Link
+            to="/about"
+            className="hover:text-yellow-500 transition-colors"
+          >
             About
           </Link>
           {isLoggedIn ? (
             <>
-              <Link to="/profile" className="hover:text-sky-500">
+              <Link
+                to="/profile"
+                className="hover:text-yellow-500 transition-colors"
+              >
                 Profile
               </Link>
               <button
@@ -41,34 +50,37 @@ const Navbar = () => {
                   localStorage.removeItem("token");
                   window.location.reload();
                 }}
-                className="hover:text-red-500"
+                className="hover:text-red-500 transition-colors"
               >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="hover:underline hover:text-sky-500">
+              <Link
+                to="/login"
+                className="hover:text-yellow-500 transition-colors"
+              >
                 Login
               </Link>
-              <Link to="/register" className="hover:underline hover:text-sky-500">
+              <Link
+                to="/register"
+                className="hover:text-yellow-500 transition-colors"
+              >
                 Sign Up
               </Link>
             </>
           )}
         </ul>
 
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-full border-2 border-gray-500 hover:border-gray-700"
-        >
-          {theme === "light" ? <FiSun size={24} /> : <FiMoon size={24} />}
-        </button>
+        {/* Profile Icon */}
+        <Link to="/profile" className="hidden md:block text-2xl">
+          <FiUser className="hover:text-yellow-500 transition-colors" />
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-emerald-600 p-4 text-2xl"
+          className="md:hidden text-white p-4 text-2xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           ☰
@@ -77,15 +89,16 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <motion.div
-        className={`fixed top-0 left-0 h-full bg-gray-800 text-white w-64 p-4 md:hidden`}
-        initial={{ x: '-100%' }}
-        animate={{ x: isMenuOpen ? 0 : '-100%' }}
-        exit={{ x: '-100%' }}
+        className="fixed top-0 left-0 h-full bg-black text-white w-64 p-4 md:hidden"
+        initial={{ x: "-100%" }}
+        animate={{ x: isMenuOpen ? 0 : "-100%" }}
         transition={{ type: "spring", stiffness: 300 }}
       >
         {/* Sidebar Content */}
         <div className="flex justify-between items-center mb-6">
-          <Logo />
+          <div className="hover:scale-105 transition-transform">
+            <Logo />
+          </div>
           <button
             className="text-white text-2xl"
             onClick={() => setIsMenuOpen(false)} // Close the sidebar
@@ -94,24 +107,30 @@ const Navbar = () => {
           </button>
         </div>
         {/* Mobile Links */}
-        <ul className="space-y-6">
+        <ul className="space-y-6 text-lg">
           <li>
-            <Link to="/" className="block text-lg hover:text-sky-500"
-            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+            <Link
+              to="/"
+              className="block hover:text-yellow-500 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
           </li>
           <li>
-            <Link to="/blogs" className="block text-lg hover:text-sky-500"
-            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+            <Link
+              to="/blogs"
+              className="block hover:text-yellow-500 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
             >
               Blogs
             </Link>
           </li>
           <li>
-            <Link to="/about" className="block text-lg hover:text-sky-500"
-            onClick={() => setIsMenuOpen(false)} // Close the sidebar
+            <Link
+              to="/about"
+              className="block hover:text-yellow-500 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
@@ -119,8 +138,10 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <li>
-                <Link to="/profile" className="block text-lg hover:text-sky-500"
-                onClick={() => setIsMenuOpen(false)} // Close the sidebar
+                <Link
+                  to="/profile"
+                  className="block hover:text-yellow-500 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Profile
                 </Link>
@@ -132,7 +153,7 @@ const Navbar = () => {
                     setIsMenuOpen(false); // Close the sidebar
                     window.location.reload();
                   }}
-                  className="block text-lg hover:text-red-500"
+                  className="block hover:text-red-500 transition-colors"
                 >
                   Logout
                 </button>
@@ -141,15 +162,19 @@ const Navbar = () => {
           ) : (
             <>
               <li>
-                <Link to="/login" className="block text-lg hover:text-sky-500"
-                onClick={() => setIsMenuOpen(false)} // Close the sidebar
+                <Link
+                  to="/login"
+                  className="block hover:text-yellow-500 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>
               </li>
               <li>
-                <Link to="/register" className="block text-lg hover:text-sky-500"
-                onClick={() => setIsMenuOpen(false)} // Close the sidebar
+                <Link
+                  to="/register"
+                  className="block hover:text-yellow-500 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Sign Up
                 </Link>
@@ -158,7 +183,6 @@ const Navbar = () => {
           )}
         </ul>
       </motion.div>
-
     </nav>
   );
 };

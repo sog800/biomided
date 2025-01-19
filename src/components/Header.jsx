@@ -1,35 +1,51 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { FiBatteryCharging, FiSend } from "react-icons/fi";
 
-const Header = ({ theme }) => {
+
+
+const Header = () => {
   return (
-    <header
-      className={`relative h-screen flex items-center justify-center ${
-        theme === "dark"
-          ? "bg-gray-800"
-          : "bg-gradient-to-r from-teal-400 to-pink-500"
-      }`}
-    >
-      <div className="absolute inset-0 bg-black opacity-30"></div>
-      <div className="z-10 text-center text-white px-6">
-        {/* Main Heading */}
-        <h1 className="text-6xl font-bold mb-16 tracking-wide">
-          Unlock the Power of <span className="text-yellow-300">Wellness</span>{" "}
-          and <span className="text-cyan-400">Beauty</span>
+    <header className=" lg:px-4 h-screen w-screen flex flex-row justfy-center bg-white text-gray-800">
+      {/* Left Section: Title, Search, and Icon */}
+      <div className="w-1/2 flex flex-col py-16 bg-white ml">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
+          LIFE IS <span className="text-sky-500">YOU</span>
         </h1>
 
-        {/* Larger Circular Button */}
-        <div className=" flex items-center justify-center ">
-        <Link
-          to="/blogs"
-          className="w-40 h-40 text-2xl font-bold flex items-center justify-center  bg-teal-500 text-white rounded-full hover:bg-teal-600 shadow-2xl transition-transform transform hover:scale-110"
-        >
-          Explore
-        </Link>
+        {/* Search Bar */}
+        <div className="relative w-full max-w-md  mb-8">
+          <input
+            type="text"
+            placeholder="Looking for..."
+            className="w-full px-4 py-3 rounded-md border border-gray-300 shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+            <FiSend />
+          </button>
+        </div>
       </div>
+
+      {/* Right Section: Image */}
+      <div className="w-1/2 flex items-center justify-center">
+        <img
+          src="https://res.cloudinary.com/ddhmjhtot/image/upload/w_1920,h_1080,c_fill,q_auto,f_auto/v1737231976/pexels-wildlittlethingsphoto-2055225_ybuqcz.jpg"
+          alt="Header Visual"
+          className="rounded-lg shadow-lg object-cover w-full h-full"
+        />
       </div>
     </header>
   );
 };
 
 export default Header;
+
+{/**
+<div className="flex flex-col  items-center">
+          <div className=" bg-white flex flex-row  shadow-lg">
+            <BiDonateHeart size={200} className="text-black mr-8"/>  
+            <FiBatteryCharging size={200} className="text-black" />
+          </div>
+          <p className="mt-4 text-lg font-medium text-gray-700">
+            Empowering you with energy and innovation.
+          </p>
+  */}
