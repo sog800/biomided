@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { HiOutlineThumbUp, HiOutlineChat } from "react-icons/hi";
+import { useParams, Link } from "react-router-dom";
+import { HiOutlineThumbUp, HiOutlineChat, HiHome, HiDocumentText } from "react-icons/hi";
 import AsideCard from "../components/AsideCard";
 import FeedbackSection from "../components/FeedbackSection";
 import Footer from "../components/Footer";
 import handleLikes from "../utils/handlelikes";
 import CommentComponent from "../components/CommentComponent";
-import { motion } from "framer-motion"; // Add animation import
+import { motion } from "framer-motion";
+import Logo from "../components/Logo";
 
-const BlogReadingPage = ({ theme }) => {
+const BlogReadingPage = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
-  const [isClicked, setIsClicked] = useState(false); // For handling like button click animation
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     fetch(`https://biomidedbackend.onrender.com/blog/blogs/${id}/`, {
@@ -29,10 +30,10 @@ const BlogReadingPage = ({ theme }) => {
       })
       .then((data) => {
         setBlog(data);
-        setLikes(data.blog_likes); // Set initial likes from the blog data
+        setLikes(data.blog_likes);
         const savedLike = localStorage.getItem(`isLiked-${id}`);
         if (savedLike) {
-          setIsLiked(JSON.parse(savedLike)); // Parse boolean from localStorage
+          setIsLiked(JSON.parse(savedLike));
         }
         setLoading(false);
       })
@@ -43,15 +44,15 @@ const BlogReadingPage = ({ theme }) => {
   }, [id]);
 
   const handleLikeClick = () => {
-    setIsClicked(true); // Trigger the animation
-    setTimeout(() => setIsClicked(false), 500); // Reset the animation after 500ms
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 500);
 
     if (likes === 0 && isLiked) {
-      setIsLiked(false); // Set isLiked to false, but don't decrement likes
+      setIsLiked(false);
     } else {
-      handleLikes(isLiked, likes, setLikes, setIsLiked, id); // Update backend and frontend
+      handleLikes(isLiked, likes, setLikes, setIsLiked, id);
     }
-    localStorage.setItem(`isLiked-${id}`, JSON.stringify(!isLiked)); // Save like state
+    localStorage.setItem(`isLiked-${id}`, JSON.stringify(!isLiked));
   };
 
   if (loading) {
@@ -66,10 +67,20 @@ const BlogReadingPage = ({ theme }) => {
 
   return (
     <>
-      <section
-        className={`pt-20 mt-16 py-8 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-emerald-50 text-black"}`}
-      >
-        <div className="container mx-auto px-4 text-center mt-24">
+      <section className="bg-white text-black">
+        <header className="flex justify-between bg-black sm:px-16 pt-4 fixed z-50 top-0 right-0 left-0 items-center px-4 py-4">
+          <Logo />
+          <div className="flex gap-4">
+            <Link to="/" className="text-2xl text-white hover:text-emerald-500" title="Home">
+              <HiHome />
+            </Link>
+            <Link to="/blogs" className="text-2xl text-white hover:text-emerald-500" title="Blogs">
+              <HiDocumentText />
+            </Link>
+          </div>
+        </header>
+
+        <div className="container mx-auto px-4 text-center pb-16 mt-24">
           <motion.h1
             className="text-5xl font-extrabold text-emerald-600 mb-4"
             initial={{ opacity: 0, y: -50 }}
@@ -79,7 +90,6 @@ const BlogReadingPage = ({ theme }) => {
             {blog.title}
           </motion.h1>
 
-          {/* Author Info */}
           <motion.div
             className="flex justify-center items-center m-4"
             initial={{ opacity: 0 }}
@@ -92,24 +102,20 @@ const BlogReadingPage = ({ theme }) => {
               className="rounded-full mt-16 object-cover mr-4"
               style={{ width: "200px", height: "200px" }}
             />
-            <div className="text-sm text-gray-200 mt-16">
-              <p>Author:   {blog.author_name}</p>
-              <p>Posted on:  {new Date(blog.posted_at).toLocaleDateString()}</p>
+            <div className="text-sm text-gray-700 mt-16">
+              <p>Author: {blog.author_name}</p>
+              <p>Posted on: {new Date(blog.posted_at).toLocaleDateString()}</p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section
-        className={`py-16 ${theme === "dark" ? "bg-gray-800 text-white" : "bg-emerald-50"}`}
-      >
+      <section className="py-16 bg-white text-black">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-2 col-span-1">
-            {/* Left Aside Card */}
             <AsideCard />
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-8 col-span-1 mx-auto">
             <motion.div
               className="mb-8 italic"
@@ -129,7 +135,6 @@ const BlogReadingPage = ({ theme }) => {
               }}
             />
 
-            {/* Like and Comments Section */}
             <motion.div
               className="flex items-center gap-8 mb-8 justify-center"
               initial={{ opacity: 0 }}
@@ -152,22 +157,19 @@ const BlogReadingPage = ({ theme }) => {
               </div>
             </motion.div>
 
-            {/* Comment Section */}
             <section className="py-16 bg-gray-50">
               <div className="container mx-auto px-4">
-                <CommentComponent theme={theme} postId={blog.id} />
+                <CommentComponent postId={blog.id} />
               </div>
             </section>
           </div>
 
           <div className="lg:col-span-2 col-span-1">
-            {/* Right Aside Card */}
             <AsideCard />
           </div>
         </div>
       </section>
 
-      {/* Mobile Layout for Asides */}
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="block lg:hidden">
@@ -177,7 +179,7 @@ const BlogReadingPage = ({ theme }) => {
         </div>
       </section>
 
-      <FeedbackSection theme={theme} />
+      <FeedbackSection />
       <Footer />
     </>
   );

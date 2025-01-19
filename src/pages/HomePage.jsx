@@ -9,6 +9,7 @@ import AdvertiseSection from "../components/AdvertiseSection";
 import getRandomLinks from "../utils/random";
 import { FiBatteryCharging } from "react-icons/fi";
 import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
 
 const quotes = [
   "The only way to do great work is to love what you do. - Steve Jobs",
@@ -54,6 +55,7 @@ const HomePage = ({ theme }) => {
 
   return (
     <div>
+      <Navbar />
       <Header theme={theme} />
 
       {/* Hero Section */}
@@ -139,6 +141,12 @@ const HomePage = ({ theme }) => {
                 title={blog.title}
                 description={`${blog.description.substring(0, 100)}...`}
                 onReadMore={() => navigate(`/blogs/${blog.id}`)}
+                authorName={blog.author_name}
+                authorImage={blog.author_image}
+                postDate={new Date(blog.posted_at).toLocaleDateString()}
+                likes={blog.blog_likes}
+                comments={blog.comments.length}
+                authorBio={blog.author_bio}
               />
             ))}
           </div>
