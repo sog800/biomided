@@ -46,7 +46,7 @@ export default function Profile({ theme }) {
     formData.append("profile_picture", file);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/auth/profile/", {
+      const response = await fetch("https://biomidedbackend.onrender.com/auth/profile/", {
         method: "PUT",
         headers: {
           Authorization: `Token ${localStorage.getItem("token")}`, // Include the token
