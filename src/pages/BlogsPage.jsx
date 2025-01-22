@@ -56,37 +56,35 @@ const BlogsPage = ({ theme }) => {
       <div
         className={`py-16 ${
           theme === "dark"
-            ? "bg-gray-800 text-white"
-            : "bg-emerald-50 text-gray-900"
+            ? "bg-gray-900 text-white"
+            : "bg-gradient-to-br from-emerald-50 to-emerald-100 text-gray-900"
         }`}
       >
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
           {/* Left Aside (Sliding Navigation) */}
           <aside
-            className={`w-64 bg-white shadow-lg lg:col-span-2 lg:block transition-transform overflow-y-auto h-auto ${
+            className={`w-64 bg-gradient-to-b from-gray-100 to-gray-200 shadow-lg lg:col-span-2 lg:block transition-transform overflow-y-auto h-auto ${
               menuOpen ? "block" : "hidden"
-            } lg:block`}
+            } lg:block rounded-lg p-4`}
           >
-            <div className="p-4 space-y-4">
-              <button
-                className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-full hover:bg-emerald-700 lg:hidden"
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <FaBars size={20} />
-                <span>{menuOpen ? "Close" : "Menu"}</span>
-              </button>
-              <div className="space-y-3">
-                {leftAsideLinks.map((item, index) => (
-                  <a
-                    href={item.link}
-                    key={index}
-                    className="flex items-center space-x-3 p-2 hover:bg-emerald-100 rounded-lg"
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.text}</span>
-                  </a>
-                ))}
-              </div>
+            <button
+              className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-full hover:bg-emerald-700 lg:hidden"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <FaBars size={20} />
+              <span>{menuOpen ? "Close" : "Menu"}</span>
+            </button>
+            <div className="space-y-3">
+              {leftAsideLinks.map((item, index) => (
+                <a
+                  href={item.link}
+                  key={index}
+                  className="flex items-center space-x-3 p-2 hover:bg-emerald-200 rounded-lg text-gray-800 font-medium"
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.text}</span>
+                </a>
+              ))}
             </div>
           </aside>
 
@@ -112,7 +110,7 @@ const BlogsPage = ({ theme }) => {
             <div className="flex justify-center mt-8">
               <button
                 onClick={loadMoreBlogs}
-                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
+                className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-lg hover:from-emerald-600 hover:to-teal-700 shadow-lg transition-transform transform hover:scale-105"
               >
                 Load More Blogs
               </button>
@@ -120,14 +118,8 @@ const BlogsPage = ({ theme }) => {
           </main>
 
           {/* Right Aside (SOGtech Services) */}
-          <aside className="lg:col-span-2 hidden lg:block overflow-y-auto h-auto">
-            <div
-              className="space-y-6 rounded-lg p-4 text-white"
-              style={{
-                background:
-                  "linear-gradient(135deg, #1e3a8a, #3b82f6, #2563eb)",
-              }}
-            >
+          <aside className="lg:col-span-2 hidden lg:block overflow-y-auto h-auto bg-gradient-to-b from-indigo-500 to-indigo-700 text-white rounded-lg p-4">
+            <div className="space-y-6">
               <h3 className="text-2xl font-semibold">SOGtech Services</h3>
               <p className="mb-4">
                 Transform your ideas with cutting-edge solutions.
