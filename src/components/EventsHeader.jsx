@@ -52,15 +52,13 @@ export default function EventsHeader() {
             className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white cursor-pointer flex items-center justify-center"
             title="Profile"
           >
-            {isLogedIn && user.image ? (
+            {/* {isLogedIn && user.image ? (
               <img
                 src={user.image}
                 alt="Profile"
                 className="w-full h-full object-cover rounded-full"
-              />
-            ) : (
+              /> */}
               <FaUserCircle size={30} className="text-gray-600" />
-            )}
             </div>
         </div>
       </div>

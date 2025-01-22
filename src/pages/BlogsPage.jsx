@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars, FaHome, FaPython, FaReact, FaDatabase } from "react-icons/fa";
 import { SiTailwindcss, SiDjango } from "react-icons/si";
 import Header from "../components/Header";
@@ -10,17 +10,20 @@ import MobileHeader from "../components/MobileHeader";
 import AdvertiseSection from "../components/AdvertiseSection";
 
 const BlogsPage = ({ theme }) => {
-  const [blogs, setBlogs] = React.useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [page, setPage] = useState(1);
 
-  React.useEffect(() => {
-    fetch("https://biomidedbackend.onrender.com/blog/all-blogs", {
-      method: "GET",
-    })
+  useEffect(() => {
+    fetch(`https://biomidedbackend.onrender.com/blog/all-blogs?page=${page}`)
       .then((response) => response.json())
-      .then((data) => setBlogs(data))
+      .then((data) => setBlogs((prevBlogs) => [...prevBlogs, ...data]))
       .catch((error) => console.error(error));
-  }, []);
+  }, [page]);
+
+  const loadMoreBlogs = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   const rightAsideServices = [
     { icon: <FaPython size={32} />, title: "Python Programming" },
@@ -60,11 +63,11 @@ const BlogsPage = ({ theme }) => {
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
           {/* Left Aside (Sliding Navigation) */}
           <aside
-            className={`fixed top-0 left-0 w-64 bg-white shadow-lg z-40 lg:relative lg:col-span-2 lg:block transition-transform overflow-y-scroll h-screen ${
-              menuOpen ? "translate-x-0" : "-translate-x-full"
-            } lg:translate-x-0`}
+            className={`w-64 bg-white shadow-lg lg:col-span-2 lg:block transition-transform overflow-y-auto h-auto ${
+              menuOpen ? "block" : "hidden"
+            } lg:block`}
           >
-            <div className="p-4 space-y-4 lg:h-full">
+            <div className="p-4 space-y-4">
               <button
                 className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-full hover:bg-emerald-700 lg:hidden"
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -88,7 +91,7 @@ const BlogsPage = ({ theme }) => {
           </aside>
 
           {/* Main Blogs Section */}
-          <main className="lg:col-span-8 z-10 lg:mx-16 overflow-y-scroll h-screen">
+          <main className="lg:col-span-8 z-10 lg:mx-16 overflow-y-auto h-auto">
             <div className="grid grid-cols-1 gap-8">
               {blogs.map((blog) => (
                 <Card
@@ -106,10 +109,18 @@ const BlogsPage = ({ theme }) => {
                 />
               ))}
             </div>
+            <div className="flex justify-center mt-8">
+              <button
+                onClick={loadMoreBlogs}
+                className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
+              >
+                Load More Blogs
+              </button>
+            </div>
           </main>
 
           {/* Right Aside (SOGtech Services) */}
-          <aside className="lg:col-span-2 hidden lg:block overflow-y-scroll h-screen">
+          <aside className="lg:col-span-2 hidden lg:block overflow-y-auto h-auto">
             <div
               className="space-y-6 rounded-lg p-4 text-white"
               style={{
