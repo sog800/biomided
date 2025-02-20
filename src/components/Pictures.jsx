@@ -10,18 +10,8 @@ const Pictures = ({ theme }) => {
         isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
       }`}
     >
-      {/* Section Title */}
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mb-4">
-          Elevate Your Lifestyle
-        </h2>
-        <p className="text-xl text-gray-600">
-          Simple changes make a meaningful difference in your well-being.
-        </p>
-      </div>
-
       {/* Image Grid with Motion Animations */}
-      <div className="flex flex-wrap justify-center gap-12">
+      <div className="flex justify-center gap-12">
         {/* Healthy Food Image */}
         <motion.div
           whileHover={{ scale: 1.1 }}
@@ -38,7 +28,7 @@ const Pictures = ({ theme }) => {
           />
           <div className="absolute inset-0 bg-black opacity-30 rounded-lg group-hover:opacity-0 transition-opacity duration-300 ease-in-out"></div>
           <p className="absolute bottom-4 left-4 text-white text-lg font-semibold">
-            A balanced meal fuels a balanced life.
+            A working together will improve hearthy.
           </p>
         </motion.div>
 
@@ -78,7 +68,7 @@ const Pictures = ({ theme }) => {
           />
           <div className="absolute inset-0 bg-black opacity-30 rounded-lg group-hover:opacity-0 transition-opacity duration-300 ease-in-out"></div>
           <p className="absolute bottom-4 left-4 text-white text-lg font-semibold">
-            
+            Lets treat our patients with love and kind
           </p>
         </motion.div>
       </div>
