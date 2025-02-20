@@ -12,17 +12,28 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 
 const quotes = [
-  "The only way to do great work is to love what you do. - Steve Jobs",
-  "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
-  "Life is what happens when you're busy making other plans. - John Lennon",
-  "The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well. - Ralph Waldo Emerson",
-  "In the middle of every difficulty lies opportunity. - Albert Einstein",
-  "The best way to predict the future is to create it. - Abraham Lincoln",
-  "It is never too late to be what you might have been. - George Eliot",
-  "Do not wait to strike till the iron is hot, but make it hot by striking. - William Butler Yeats",
-  "Success usually comes to those who are too busy to be looking for it. - Henry David Thoreau",
-  "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+  "Wherever the art of medicine is loved, there is also a love of humanity. - Hippocrates",
+  "The greatest wealth is health. - Virgil",
+  "Healing is a matter of time, but it is sometimes also a matter of opportunity. - Hippocrates",
+  "Medicine is a science of uncertainty and an art of probability. - William Osler",
+  "The doctor of the future will give no medicine, but will interest his patients in the care of the human frame. - Thomas Edison",
+  "Prevention is better than cure. - Desiderius Erasmus",
+  "To cure sometimes, to relieve often, to comfort always. - Edward Livingston Trudeau",
+  "Medicine is not only a science; it is also an art. - Paracelsus",
+  "The best doctor gives the least medicine. - Benjamin Franklin",
+  "Doctors are not just healers, they are also caregivers. - Unknown",
+  "Health is not valued until sickness comes. - Thomas Fuller",
+  "A good doctor treats the disease; a great doctor treats the patient who has the disease. - Unknown",
+  "In nothing do men more nearly approach the gods than in giving health to men. - Cicero",
+  "Let food be thy medicine and medicine be thy food. - Hippocrates",
+  "Medicine is the restoration of discordant elements. - Leonardo da Vinci",
+  "A physician without a knowledge of astrology has no right to call himself a physician. - Hippocrates",
+  "An ounce of prevention is worth a pound of cure. - Benjamin Franklin",
+  "The first wealth is health. - Ralph Waldo Emerson",
+  "The art of medicine consists of amusing the patient while nature cures the disease. - Voltaire",
+  "The physician should not treat the disease but the patient who is suffering from it. - Maimonides"
 ];
+
 
 const HomePage = ({ theme }) => {
   const [blogs, setBlogs] = useState([]);
@@ -93,44 +104,9 @@ const HomePage = ({ theme }) => {
       {/* Life Section */}
       <LifeSection theme={theme} />
 
-      {/* Welcome Section */}
-      <section
-        className={`py-16 mt-6 ${theme === "dark" ? "bg-gray-800" : "bg-emerald-50"}`}
-      >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className={`text-3xl sm:text-4xl font-bold ${theme === "dark" ? "text-white" : "text-emerald-600"} mb-6`}
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Welcome to Our Blogging Community
-          </motion.h2>
-
-          <motion.p
-            className={`text-lg ${theme === "dark" ? "text-gray-300" : "text-gray-700"} border-b-2 border-gray-300 pb-4`}
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <em>
-              We are passionate about sharing knowledge and experiences on
-              health, beauty, and natural living. This platform is not just
-              about one voice— it’s a community where like-minded individuals
-              can come together to share their unique perspectives and ideas.
-              Whether you’re a seasoned expert or just starting, we welcome you
-              to join us in making a difference.
-            </em>
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Latest Blogs Section */}
+      {/* topics */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-10 text-gray-900">
-            Latest Insights from Our Blog
-          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {blogs.slice(0, 3).map((blog) => (
               <Card

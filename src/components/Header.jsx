@@ -9,7 +9,7 @@ const Header = () => {
       {/* Left Section: Title, Search, and Icon */}
       <div className="w-1/2 flex flex-col py-16 bg-white ml">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6">
-          LIFE IS <span className="text-sky-500">YOU</span>
+          Best me<span className="text-sky-500">Best you</span>
         </h1>
 
         {/* Search Bar */}
@@ -28,7 +28,7 @@ const Header = () => {
       {/* Right Section: Image */}
       <div className="w-1/2 flex items-center justify-center">
         <img
-          src="https://res.cloudinary.com/ddhmjhtot/image/upload/w_1920,h_1080,c_fill,q_auto,f_auto/v1737231976/pexels-wildlittlethingsphoto-2055225_ybuqcz.jpg"
+          src="https://res.cloudinary.com/ddhmjhtot/image/upload/w_1920,h_1080,c_fill,q_auto,f_auto/v1740080061/freepik__the-style-is-candid-image-photography-with-natural__34423_oy0yzy.jpg"
           alt="Header Visual"
           className="rounded-lg shadow-lg object-cover w-full h-full"
         />
