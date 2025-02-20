@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion"; // For animations
 
-const LifeSection = ({ theme }) => {
+const Pictures = ({ theme }) => {
   const isDark = theme === "dark";
 
   return (
@@ -32,7 +32,7 @@ const LifeSection = ({ theme }) => {
           className="w-full sm:w-1/2 lg:w-1/3 relative group"
         >
           <img
-            src="https://res.cloudinary.com/ddhmjhtot/image/upload/v1736849303/cld-sample-4.jpg"
+            src="https://res.cloudinary.com/ddhmjhtot/image/upload/v1740083247/freepik__the-style-is-candid-image-photography-with-natural__34424_ynl2f0.jpg"
             alt="Healthy Food"
             className="rounded-lg shadow-xl transform transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
@@ -52,7 +52,7 @@ const LifeSection = ({ theme }) => {
           className="w-full sm:w-1/2 lg:w-1/3 relative group"
         >
           <img
-            src="https://res.cloudinary.com/ddhmjhtot/image/upload/v1736849303/cld-sample-3.jpg"
+            src="https://res.cloudinary.com/ddhmjhtot/image/upload/v1740083257/freepik__the-style-is-candid-image-photography-with-natural__34425_nhombg.jpg"
             alt="Sport"
             className="rounded-lg shadow-xl transform transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
@@ -72,13 +72,13 @@ const LifeSection = ({ theme }) => {
           className="w-full sm:w-1/2 lg:w-1/3 relative group"
         >
           <img
-            src="https://res.cloudinary.com/ddhmjhtot/image/upload/v1736849297/samples/two-ladies.jpg"
+            src="https://res.cloudinary.com/ddhmjhtot/image/upload/v1740083650/freepik__the-style-is-candid-image-photography-with-natural__94179_bxndxp.jpg"
             alt="Happy People"
             className="rounded-lg shadow-xl transform transition-transform duration-300 ease-in-out group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black opacity-30 rounded-lg group-hover:opacity-0 transition-opacity duration-300 ease-in-out"></div>
           <p className="absolute bottom-4 left-4 text-white text-lg font-semibold">
-            Joy shared is joy multiplied.
+            
           </p>
         </motion.div>
       </div>
@@ -86,4 +86,4 @@ const LifeSection = ({ theme }) => {
   );
 };
 
-export default LifeSection;
+export default Pictures;

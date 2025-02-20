@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Card from "../components/Card";
-import LifeSection from "../components/LifeSection";
+import Pictures from "../components/Pictures";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
@@ -101,8 +101,8 @@ const HomePage = ({ theme }) => {
         </div>
       </section>
 
-      {/* Life Section */}
-      <LifeSection theme={theme} />
+      {/*pictures */}
+      <Pictures theme={theme} />
 
       {/* topics */}
       <section className="py-16 bg-white">
